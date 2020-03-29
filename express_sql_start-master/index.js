@@ -116,7 +116,7 @@ app.post("/admin/edit/:id", (req, res) => {
   const id = req.params.id;
   const contact = [req.body.title, req.body.email, req.body.message, id];
   // update contact by id
-  const sql = "";
+  const sql = "UPDATE contacts SET title = ?, email = ?, message = ? WHERE (id = ?)";
   db.run(sql, contact, err => {
     if (err) {
       return console.error(err.message);
@@ -128,7 +128,7 @@ app.post("/admin/edit/:id", (req, res) => {
 // GET /delete/5
 app.get("/admin/delete/:id", (req, res) => {
   const id = req.params.id;
-  const sql = "";
+  const sql = "SELECT * FROM contacts WHERE id = ?";
   db.get(sql, id, (err, row) => {
     if (err) {
       return console.error(err.message);
@@ -143,7 +143,7 @@ app.get("/admin/delete/:id", (req, res) => {
 app.post("/admin/delete/:id", (req, res) => {
   const id = req.params.id;
   // delete contact by id
-  const sql = "";
+  const sql = "DELETE FROM contacts WHERE id = ?";
   db.run(sql, id, err => {
     if (err) {
       return console.error(err.message);
